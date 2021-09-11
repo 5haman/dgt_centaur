@@ -1,5 +1,6 @@
+BUILDROOT_VERSION := 2021.08
 BUILDROOT_DIR := /tmp/buildroot
-ROOTFS_DIR := ./buildroot/board/raspberrypi/zerow/rootfs_overlay
+ROOTFS_DIR := ./buildroot/board/dgt/centaur/rootfs_overlay
 SD_CARD := mmcblk0
 SD_CARD_SIZE := 16G
 WPA_PRESENT := $(shell ls $(ROOTFS_DIR)/etc/wpa_supplicant.conf 2>/dev/null)
@@ -14,9 +15,7 @@ build: init config buildroot
 
 init:
 ifeq ($(BUILDROOT_PRESENT),)
-	git clone --depth 1 git://git.buildroot.net/buildroot $(BUILDROOT_DIR)
-	#cd $(BUILDROOT_DIR)/configs && ln -sf ../../buildroot.config rpizerow_defconfig
-	#cd $(BUILDROOT_DIR)/board && ln -sf ../../rootfs rpizerow
+	git clone -b $(BUILDROOT_VERSION) --depth 1 git://git.buildroot.net/buildroot $(BUILDROOT_DIR)
 endif
 
 config:
@@ -27,7 +26,7 @@ ifeq ($(WPA_PRESENT),)
 endif
 
 buildroot:
-	cd $(BUILDROOT_DIR) && make BR2_EXTERNAL=$(PWD)/buildroot zerow_defconfig && make
+	cd $(BUILDROOT_DIR) && make BR2_EXTERNAL=$(PWD)/buildroot centaur_defconfig && make BR2_EXTERNAL=$(PWD)/buildroot O=./build
 
 flash:
 	sudo dd if=$(BUILDROOT_DIR)/output/images/sdcard.img of=$(SD_CARD) bs=1M status=progress conv=fsync
@@ -36,4 +35,5 @@ flash:
 	sudo resize2fs $(SD_CARD)p2
 
 clean:
-	rm -r $(BUILDROOT_DIR)
+	cd $(BUILDROOT_DIR) && make distclean
+	rm -rf $(ROOTFS_DIR)/etc/wpa_supplicant.conf
