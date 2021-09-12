@@ -1,2 +1,4 @@
 brcmfmac
-
+spidev
+spi-bcm2835aux
+cdc-acm

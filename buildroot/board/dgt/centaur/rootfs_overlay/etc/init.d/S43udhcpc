@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Start/stop udhcpc
+#
+
+/sbin/udhcpc -i wlan0
