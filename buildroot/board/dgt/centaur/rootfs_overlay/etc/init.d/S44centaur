@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Start/stop centaur
+#
+
+cd /home/pi/centaur
+./centaur &
