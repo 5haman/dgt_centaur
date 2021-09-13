@@ -1,0 +1,1 @@
+root=/dev/mmcblk0p2 rootwait console=tty1 fastboot noatime nodiratime noram logo.nologo quiet fsck.mode=force fsck.repair=yes audit=0 selinux=0

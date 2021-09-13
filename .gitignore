@@ -1,0 +1,3 @@
+_build/
+vendor/
+buildroot/board/dgt/centaur/rootfs_overlay/etc/wpa_supplicant.conf

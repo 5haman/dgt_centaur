@@ -6,7 +6,8 @@ BOARD_DIR="$(dirname $0)"
 GENIMAGE_CFG="${BOARD_DIR}/genimage.cfg"
 GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
 
-cp -vf  "${BOARD_DIR}/configs/boot_config" "${BINARIES_DIR}/rpi-firmware/config.txt"
+cp -f  "${BOARD_DIR}/configs/cmdline.txt" "${BINARIES_DIR}/rpi-firmware/"
+cp -f  "${BOARD_DIR}/configs/config.txt" "${BINARIES_DIR}/rpi-firmware/"
 
 trap 'rm -rf "${ROOTPATH_TMP}"' EXIT
 ROOTPATH_TMP="$(mktemp -d)"

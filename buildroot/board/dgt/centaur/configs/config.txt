@@ -1,0 +1,45 @@
+# Please note that this is only a sample, we recommend you to change it to fit
+# your needs.
+# You should override this file using a post-build script.
+# See http://buildroot.org/manual.html#rootfs-custom
+# and http://elinux.org/RPiconfig for a description of config.txt syntax
+
+# We always use the same names, the real used variant is selected by
+# BR2_PACKAGE_RPI_FIRMWARE_{DEFAULT,X,CD} choice
+start_file=start.elf
+fixup_file=fixup.dat
+
+kernel=zImage
+
+# Disable overscan assuming the display supports displaying the full resolution
+# If the text shown on the screen disappears off the edge, comment this out
+disable_overscan=1
+
+gpu_mem=16
+arm_freq=1100
+
+# Disable the ACT LED on the Pi Zero.
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+
+# Disable the splash screen
+disable_splash=1
+
+# Overclock the SD Card from 50 to 100MHz
+# This can only be done with at least a UHS Class 1 card
+dtoverlay=sdtweak,overclock_50=100
+
+# Set the bootloader delay to 0 seconds. The default is 1s if not specified.
+boot_delay=0
+
+# Overclock the raspberry pi. This voids its warranty. Make sure you have a good power supply.
+force_turbo=1
+
+avoid_safe_mode=1
+dtparam=spi=on
+dtoverlay=spi1-1cs
+dtoverlay=pi3-disable-bt
+dtparam=audio=off
+
+enable_uart=1
+ignore_lcd=1

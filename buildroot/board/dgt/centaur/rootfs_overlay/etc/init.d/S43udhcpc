@@ -3,4 +3,4 @@
 # Start/stop udhcpc
 #
 
-/sbin/udhcpc -i wlan0
+/sbin/udhcpc -i wlan0 -x lease:86400
